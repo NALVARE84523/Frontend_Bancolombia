@@ -12,7 +12,7 @@ const Home = () => {
   const userName = sessionStorage.getItem("userName");
   const rol = sessionStorage.getItem("userRole");
   const skills = useContext(SkillsContext);
-  const {setTareasRegistradasClient = [] } = skills;
+  const {setTareasRegistradasClient} = skills || {};
   const navigate = useNavigate();
   const validationUser = (skillsUser) => {
     console.log("userName: ", userName);

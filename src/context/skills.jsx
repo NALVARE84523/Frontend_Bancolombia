@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 /* import { toast } from "react-toastify"; */
 
@@ -9,8 +9,13 @@ export function SkillsProvider({ children }) {
   const rol = sessionStorage.getItem("userRole");
   const [skillDoer, setSkillDoer] = useState([]);
   const [tareasRegistradasClient, setTareasRegistradasClient] = useState([]);
+
+/*   useEffect(() => {
+    console.log("rol desde provider: ", rol);
+  }, [userName]); */
   
-/*   const getDataClient = () => {
+  
+  /* const getDataClient = () => {
     fetch("https://backend-bancolombia.onrender.com/tasks?userId=" + userName)
       .then((res) => res.json())
       .then((resp) => {
