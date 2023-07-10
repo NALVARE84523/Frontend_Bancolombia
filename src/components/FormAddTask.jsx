@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import PropTypes from "prop-types";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -105,7 +106,7 @@ const FormAddTask = ({getDataClient}) => {
         id: 59,
         userId: userName,
         category: categoria,
-        requiredSkills: requiredSkills.toString(),
+        requiredSkills: requiredSkills,
         description: tarea,
         price: precioFinal,
         stateCode: 'enabled',
@@ -206,6 +207,10 @@ const FormAddTask = ({getDataClient}) => {
       </Box>
     </>
   );
+};
+
+FormAddTask.propTypes = {
+  getDataClient: PropTypes.func.isRequired,
 };
 
 export default FormAddTask;
