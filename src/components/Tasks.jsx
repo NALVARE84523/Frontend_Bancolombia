@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { SkillsContext } from '../context/skills';
 import CardTask from './CardTask';
 
-const Tasks = () => {
+const Tasks = ({getDataClient, getDataDoer}) => {
   const skills = useContext(SkillsContext);
-  const { tareasRegistradasClient, getDataClient, getDataDoer, rol, userName } = skills || {};
+  const { tareasRegistradasClient, rol, userName } = skills || {};
   
   useEffect(() => {
     if(rol === 'client') {
@@ -20,8 +20,9 @@ const Tasks = () => {
   }, []);
   
   const performTask = (task) => {
+    console.log("Task: ", task);
     let regobj={
-      active: false,
+      stateCode: 'inProgress',
       assignedUserName: userName,
       state: 'En progreso por: ' + userName
     }

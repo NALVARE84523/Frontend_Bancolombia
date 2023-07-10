@@ -18,9 +18,9 @@ import FormAddTask from "./FormAddTask";
 import { SkillsContext } from '../context/skills';
 import Notifications from './Notifications';
 
-export default function Header() {
+export default function Header({getDataDoer, getDataClient}) {
   const skills = useContext(SkillsContext);
-  const { skillDoer = [], getDataDoer } = skills || {};
+  const { skillDoer = [] } = skills || {};
   const userName = sessionStorage?.getItem("userName");
   const rol = sessionStorage?.getItem("userRole");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -63,10 +63,14 @@ export default function Header() {
           <>
             <Link to={'/tasksProcess'}><Typography sx={{ minWidth: 100, color: 'text.primary' }}>Tareas en proceso</Typography></Link>
             <Typography onClick={handleOpenSkill} sx={{ minWidth: 100, color: 'text.primary', cursor: 'pointer' }}>Mis habilidades</Typography>
+            <Link to={'/tasksFinalized'}><Typography sx={{ minWidth: 100, color: 'text.primary' }}>Tareas finalizadas</Typography></Link>
           </>
         )}
         {rol === 'client' && (
-            <Typography onClick={handleOpenTask} sx={{ minWidth: 100, color: 'text.primary', cursor: 'pointer' }}>Publicar tarea</Typography>
+            <> 
+              <Typography onClick={handleOpenTask} sx={{ minWidth: 100, color: 'text.primary', cursor: 'pointer' }}>Publicar tarea</Typography>
+              <Link to={'/tasksFinalized'}><Typography sx={{ minWidth: 100, color: 'text.primary' }}>Tareas finalizadas</Typography></Link>
+            </>
         )}
         <Notifications/>
         <Tooltip title="Account settings">
@@ -144,7 +148,7 @@ export default function Header() {
         </Button>
       </ModalCustom>
       <ModalCustom handleClose={handleCloseTask} open={openTask}>
-        <FormAddTask />
+        <FormAddTask getDataClient={getDataClient} />
       </ModalCustom>
     </>
   );

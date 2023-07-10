@@ -11,8 +11,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Checkbox, ListItemText, OutlinedInput } from "@mui/material";
-import { useContext } from "react";
-import { SkillsContext } from "../context/skills";
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -22,7 +21,7 @@ const MenuProps = {
   },
 };
 
-const FormAddTask = () => {
+const FormAddTask = ({getDataClient}) => {
   const rol = sessionStorage.getItem("userRole");
   const userName = sessionStorage.getItem("userName");
   const [totalSkills, setTotalSkills] = useState([]);
@@ -31,8 +30,6 @@ const FormAddTask = () => {
   const [categoria, setCategoria] = useState("");
   const [categories, setCategories] = useState([]);
   const [requiredSkills, setRequiredSkills] = useState([]);
-  const skills = useContext(SkillsContext);
-  const { getDataClient } = skills;
 
   const handleChange = (event) => {
     const {
@@ -55,7 +52,6 @@ const FormAddTask = () => {
       .then((resp) => {
         let arraySkill = resp.map((skill) => skill.skill);
         setTotalSkills(arraySkill);
-        console.log("respSkills: ", arraySkill);
       })
       .catch((err) => {
         console.error("Failed service: " + err.message);
@@ -106,13 +102,13 @@ const FormAddTask = () => {
 
       // Agregar la nueva tarea registrada al array de tareas
       const nuevaTarea = {
-        id: 58,
+        id: 59,
         userId: userName,
         category: categoria,
-        requiredSkills: requiredSkills,
+        requiredSkills: requiredSkills.toString(),
         description: tarea,
         price: precioFinal,
-        active: true,
+        stateCode: 'enabled',
         assignedUserName: null,
         state: "En espera",
         date: new Date().toLocaleDateString("es-CO",{ weekday:'long', day:'numeric', month:'long', year:'numeric' })
@@ -144,7 +140,7 @@ const FormAddTask = () => {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <FormControl sx={{ m: 1, minWidth: 120, width: '47%' }}>
+        <FormControl sx={{ m: 1, minWidth: 120, width: '44%' }}>
           <InputLabel id="demo-simple-select-helper-label">
             Categoria
           </InputLabel>
@@ -168,7 +164,7 @@ const FormAddTask = () => {
           </Select>
           <FormHelperText>With label + helper text</FormHelperText>
         </FormControl>
-        <FormControl sx={{ m: 1, minwidth: 120, width: '47%' }}>
+        <FormControl sx={{ m: 1, minwidth: 120, width: '44%' }}>
           <InputLabel id="demo-multiple-checkbox-label">Habilidades</InputLabel>
           <Select
             labelId="demo-multiple-checkbox-label"

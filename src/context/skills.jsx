@@ -1,17 +1,16 @@
 import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
-import { toast } from "react-toastify";
+/* import { toast } from "react-toastify"; */
 
 export const SkillsContext = createContext();
 
 export function SkillsProvider({ children }) {
-  console.log("Cuantas veces se renderiza el provider");
   const userName = sessionStorage.getItem("userName");
   const rol = sessionStorage.getItem("userRole");
   const [skillDoer, setSkillDoer] = useState([]);
   const [tareasRegistradasClient, setTareasRegistradasClient] = useState([]);
   
-  const getDataClient = () => {
+/*   const getDataClient = () => {
     fetch("https://backend-bancolombia.onrender.com/tasks?userId=" + userName)
       .then((res) => res.json())
       .then((resp) => {
@@ -27,7 +26,6 @@ export function SkillsProvider({ children }) {
       .then((skillsUser) => {
         const skillsArray = skillsUser[0]?.skills || [];
         const endpoint = "https://backend-bancolombia.onrender.com/tasks?" + skillsArray.map(skill => `requiredSkills=${encodeURIComponent(skill)}`).join('&') + "&active=true";
-        console.log("Endpoint: ", endpoint);
         if (rol === "doer") {
           fetch(endpoint)
             .then((res) => res.json())
@@ -43,7 +41,7 @@ export function SkillsProvider({ children }) {
       .catch((err) => {
         toast.error("Failed service: " + err.message);
       });
-  };
+  }; */
 
   return (
     <SkillsContext.Provider
@@ -54,8 +52,8 @@ export function SkillsProvider({ children }) {
         setSkillDoer,
         tareasRegistradasClient,
         setTareasRegistradasClient,
-        getDataClient,
-        getDataDoer,
+        // getDataClient,
+        // getDataDoer,
       }}
     >
       {children}

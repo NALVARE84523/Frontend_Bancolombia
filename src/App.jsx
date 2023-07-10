@@ -7,6 +7,7 @@ import TasksProcess from './pages/TasksProcess';
 import {ToastContainer} from 'react-toastify';
 import './App.css';
 import { SkillsProvider } from './context/skills';
+import TasksFinalized from './pages/TasksFinalized';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/tasksProcess' element={<TasksProcess/>}></Route>
+          <Route path='/tasksFinalized' element={<TasksFinalized/>}></Route>
         </Routes>
       </SkillsProvider>
       </BrowserRouter>
