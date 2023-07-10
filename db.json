@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "Nelson",
+      "name": "Nelson Alvarez",
+      "password": "Nelson",
+      "email": "nelson@nelson.c",
+      "phone": "123456789",
+      "country": "USA",
+      "address": "",
+      "gender": "male"
+    }
+  ]
+}
