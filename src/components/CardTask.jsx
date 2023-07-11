@@ -56,7 +56,7 @@ export default function CardTask({ task, functionButton }) {
     }
   };
   return (
-    <Card sx={{ maxWidth: 345, width: '23.5%' }}>
+    <Card sx={{ maxWidth: 345, minWidth: 320, width: '23.5%' }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
