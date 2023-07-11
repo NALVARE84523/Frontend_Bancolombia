@@ -51,10 +51,8 @@ describe('Login component', () => {
     fireEvent.change(passwordInput, { value: 'Nelson' } );
     fireEvent.click(loginButton);
 
-    // Espera a que se complete la llamada fetch
     await waitFor(() => screen.getByText('Inicio de sesion'));
 
-   // Crear el espía
     const fetchSpy = sinon.stub().resolves({
       json: () =>
         Promise.resolve({
@@ -63,17 +61,10 @@ describe('Login component', () => {
         }),
     });
 
-// Sobrescribir la función fetch global
     global.fetch = fetchSpy;
     expect(fetchSpy.callCount).toBe(0);
     expect(fetchSpy.calledWith('https://backend-bancolombia.onrender.com/users')).toBe(false);
 
-    // ...
-
-    // Restaurar la función fetch original
-    delete global.fetch;
-/*     expect(sessionStorage.getItem('userName')).toBe('Nelson2');
-    expect(sessionStorage.getItem('userRole')).toBe('doer'); */
     expect(history.location.pathname).toBe('/');
   });
 
@@ -103,16 +94,6 @@ describe('Login component', () => {
     fireEvent.change(passwordInput, { value: 'incorrectpassword' } );
     fireEvent.click(loginButton);
 
-    // Wait for fetch to complete
-    /* await waitFor(() => screen.findByText('Please enter valid credentials')) */
-
-    /* expect(mockFetch).toHaveBeenCalledTimes(1);
-    expect(mockFetch).toHaveBeenCalledWith(
-      'https://backend-bancolombia.onrender.com/users/testuser'
-    );
-    expect(sessionStorage.getItem('userName')).toBeNull();
-    expect(sessionStorage.getItem('userRole')).toBeNull(); */
   });
 
-  // Add more test cases for edge cases and validation if needed
 });

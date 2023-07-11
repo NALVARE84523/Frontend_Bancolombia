@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect} from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,10 +11,25 @@ import { red } from "@mui/material/colors";
 import { Button } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 export default function CardTask({ task, functionButton }) {
   const userName = sessionStorage.getItem("userName");
   const userRol = sessionStorage.getItem("userRole");
+  useEffect(() => {
+    fetch("https://backend-bancolombia.onrender.com/categories")
+      .then((res) => res.json())
+      .then((resp) => {
+        const matchingCategory = resp.find((item) => item.category === task.category);
+        if (matchingCategory) {
+          task.image = matchingCategory.image;
+        }
+        console.log("Task: ", task);
+      })
+      .catch((err) => {
+        toast.error("Failed service: " + err.message);
+      });
+  }, []);
   const buttonTask = () => {
     if (!task.state.includes("progreso") && !task.stateCode.includes("finalized") && userRol === "doer") {
       return (
@@ -52,13 +67,13 @@ export default function CardTask({ task, functionButton }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={task.category}
-        subheader={task.date}
+        title={task?.category}
+        subheader={task?.date}
       />
       <CardMedia
         component="img"
         height="194"
-        image="https://i.postimg.cc/MG8Hxh1g/catering-alimentos.webp"
+        image={task?.image}
         alt="Image task"
       />
       <CardContent>
