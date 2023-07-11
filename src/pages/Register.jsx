@@ -26,7 +26,7 @@ const MenuProps = {
     },
   };
 
-export default function RegisterV2() {
+export default function Register() {
     const [id, idChange] = useState("");
     const [name, nameChange] = useState("");
     const [password, passwordChange] = useState("");
@@ -40,7 +40,6 @@ export default function RegisterV2() {
       .then((res) => res.json())
       .then((resp) => {
         let arraySkill = resp.map((skill) => skill.skill);
-        console.log("arraySkill: ", arraySkill);
         setTotalSkills(arraySkill);
       })
       .catch((err)=> {

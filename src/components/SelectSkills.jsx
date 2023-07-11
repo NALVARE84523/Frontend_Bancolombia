@@ -28,16 +28,13 @@ const SelectSkills = ({ skillDoer }) => {
       target: { value },
     } = event;
     setSkillDoer(typeof value === "string" ? value.split(",") : value);
-    /* getDataDoer(); */
   };
   useEffect(() => {
-    console.log("skillDOer: ", skillDoer);
     if (rol === "doer") {
       fetch("https://backend-bancolombia.onrender.com/skills")
         .then((res) => res.json())
         .then((resp) => {
           let arraySkill = resp.map((skill) => skill.skill);
-          console.log("arraySkill: ", arraySkill);
           setTotalSkills(arraySkill);
         })
         .catch((err) => {

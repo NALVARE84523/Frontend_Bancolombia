@@ -92,16 +92,12 @@ const FormAddTask = ({getDataClient}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (rol === "client") {
-      // Validar campos obligatorios
       if (!categoria || !tarea) {
         toast.warning("Por favor, complete los campos obligatorios.");
         return;
       }
-
-      // Asignar un precio predeterminado si no se ingresó uno
       const precioFinal = precio || 0;
 
-      // Agregar la nueva tarea registrada al array de tareas
       const nuevaTarea = {
         userId: userName,
         category: categoria,

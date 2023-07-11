@@ -127,8 +127,8 @@ export default function Header({getDataDoer, getDataClient}) {
           <Avatar /> {userName}
         </MenuItem>
         <Divider />
-        <Link to={'/login'}> 
-            <MenuItem onClick={handleClose}>
+        <Link to={'/login'} > 
+            <MenuItem sx={{color: 'blue'}} onClick={handleClose}>
             Logout
             </MenuItem>
         </Link>

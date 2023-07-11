@@ -29,7 +29,6 @@ export default function Notifications() {
           .then((notifications) => {
             setCountNotifications(notifications.length);
             setDataNotification(notifications)
-            console.log("notifications: ", notifications);
           })
           .catch((err) => {
             toast.error("Failed service: " + err.message);
@@ -37,7 +36,6 @@ export default function Notifications() {
       };
     useEffect(() => {
         getDataNotifications();
-        console.log("dataNotification: ", dataNotification);
     }, [])
   return (
     <>

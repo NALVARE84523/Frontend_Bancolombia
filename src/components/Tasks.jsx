@@ -21,7 +21,6 @@ const Tasks = ({getDataClient, getDataDoer}) => {
   }, []);
   
   const performTask = (task) => {
-    console.log("Task: ", task);
     let regobj={
       stateCode: 'inProgress',
       assignedUserName: userName,

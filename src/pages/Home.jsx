@@ -12,21 +12,25 @@ const Home = () => {
   const userName = sessionStorage.getItem("userName");
   const rol = sessionStorage.getItem("userRole");
   const skills = useContext(SkillsContext);
-  const {setTareasRegistradasClient} = skills || {};
+  const { setTareasRegistradasClient } = skills || {};
   const navigate = useNavigate();
   const validationUser = (skillsUser) => {
-    console.log("userName: ", userName);
-    if (userName === "" || userName === null || userName === undefined || skillsUser.length === 0) {
+    if (
+      userName === "" ||
+      userName === null ||
+      userName === undefined ||
+      skillsUser.length === 0
+    ) {
       navigate("/login");
       return;
     }
-    if(rol === "doer") {
+    if (rol === "doer") {
       getDataDoer();
     }
-    if(rol === "client") {
+    if (rol === "client") {
       getDataClient();
     }
-  }
+  };
   const getDataClient = () => {
     fetch("https://backend-bancolombia.onrender.com/tasks?userId=" + userName)
       .then((res) => res.json())
@@ -34,6 +38,7 @@ const Home = () => {
         setTareasRegistradasClient(resp);
       })
       .catch((err) => {
+        navigate("/login");
         toast.error("Failed service: " + err.message);
       });
   };
@@ -42,16 +47,16 @@ const Home = () => {
       .then((res) => res.json())
       .then((skillsUser) => {
         const skillsArray = skillsUser[0]?.skills || [];
-        console.log("skillsArray: ", skillsArray);
-        //  + skillsArray.map(skill => `requiredSkills_contains=${encodeURIComponent(skill)}`).join('&') + "&stateCode=enabled"
-        const endpoint = "https://backend-bancolombia.onrender.com/tasks?&stateCode=enabled";
+        const endpoint =
+          "https://backend-bancolombia.onrender.com/tasks?&stateCode=enabled";
         if (rol === "doer") {
           fetch(endpoint)
-            .then((res) => res.json())
+            .then((res) => res.json())  
             .then((resp) => {
-              console.log("resp: ", resp);
-              const filteredTasks = resp.filter(task => {
-                return skillsArray.some(skill => task.requiredSkills.includes(skill));
+              const filteredTasks = resp.filter((task) => {
+                return skillsArray.some((skill) =>
+                  task.requiredSkills.includes(skill)
+                );
               });
               setTareasRegistradasClient(filteredTasks);
             })
@@ -62,6 +67,7 @@ const Home = () => {
         }
       })
       .catch((err) => {
+        navigate("/login");
         toast.error("Failed service: " + err.message);
       });
   };
@@ -73,7 +79,7 @@ const Home = () => {
       <Header getDataDoer={getDataDoer} getDataClient={getDataClient} />
       <>
         <CssBaseline />
-        <Container maxWidth="xl" sx={{ marginTop: '30px' }}>
+        <Container maxWidth="xl" sx={{ marginTop: "30px" }}>
           <Tasks getDataDoer={getDataDoer} getDataClient={getDataClient} />
         </Container>
       </>
