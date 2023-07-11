@@ -103,7 +103,6 @@ const FormAddTask = ({getDataClient}) => {
 
       // Agregar la nueva tarea registrada al array de tareas
       const nuevaTarea = {
-        id: 59,
         userId: userName,
         category: categoria,
         requiredSkills: requiredSkills,
@@ -210,7 +209,7 @@ const FormAddTask = ({getDataClient}) => {
 };
 
 FormAddTask.propTypes = {
-  getDataClient: PropTypes.func.isRequired,
+  getDataClient: PropTypes.func,
 };
 
 export default FormAddTask;

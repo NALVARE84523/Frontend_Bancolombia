@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import sinon from 'sinon';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Login from '../pages/Login';
 
@@ -14,10 +14,10 @@ describe('Login component', () => {
       </MemoryRouter>
     );
 
-    const usernameInput = screen.getByText('User Name');
-    const passwordInput = screen.getByText('Password');
-    const loginButton = screen.getByRole('button', { name: 'Login' });
-    const newUserLink = screen.getByRole('link', { name: 'New User' });
+    const usernameInput = screen.getByTestId('userName');
+    const passwordInput = screen.getByTestId('password');
+    const loginButton = screen.getByRole('button', { name: 'Ingresar' });
+    const newUserLink = screen.getByRole('link', { name: 'Registrate' });
 
     expect(usernameInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
@@ -45,14 +45,14 @@ describe('Login component', () => {
 
     const usernameInput = screen.getByTestId('userName');
     const passwordInput = screen.getByTestId('password');
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Ingresar' });
 
-    fireEvent.change(usernameInput, { target: { value: 'Nelson2' } });
-    fireEvent.change(passwordInput, { target: { value: 'Nelson' } });
+    fireEvent.change(usernameInput, { value: 'Nelson2' } );
+    fireEvent.change(passwordInput, { value: 'Nelson' } );
     fireEvent.click(loginButton);
 
     // Espera a que se complete la llamada fetch
-    await waitFor(() => screen.getByText('Login'));
+    await waitFor(() => screen.getByText('Inicio de sesion'));
 
    // Crear el espía
     const fetchSpy = sinon.stub().resolves({
@@ -96,10 +96,11 @@ describe('Login component', () => {
 
     const usernameInput = screen.getByTestId('userName');
     const passwordInput = screen.getByTestId('password');
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Ingresar' });
+    console.log("usernameInput: ", usernameInput);
 
-    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-    fireEvent.change(passwordInput, { target: { value: 'incorrectpassword' } });
+    fireEvent.change(usernameInput, { value: 'testuser' } );
+    fireEvent.change(passwordInput, { value: 'incorrectpassword' } );
     fireEvent.click(loginButton);
 
     // Wait for fetch to complete

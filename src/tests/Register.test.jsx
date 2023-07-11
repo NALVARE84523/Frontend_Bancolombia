@@ -12,7 +12,7 @@ describe('Register', () => {
       </MemoryRouter>
     );
 
-    const registerElement = screen.getByText('Password');
+    const registerElement = screen.getByTestId('registro');
     expect(registerElement).toBeInTheDocument();
   });
 
@@ -25,7 +25,7 @@ describe('Register', () => {
     );
     
     // Simula el envío del formulario sin completar ningún campo
-    const registerButton = screen.getByText('Registrarme');
+    const registerButton = screen.getByTestId('registrarme');
     fireEvent.click(registerButton);
 
     // Verifica que se muestren los mensajes de error correspondientes
@@ -40,7 +40,7 @@ describe('Register', () => {
     );
 
     // Simula el envío del formulario con el campo de email con un formato inválido
-    const registerButton = screen.getByText('Registrarme');
+    const registerButton = screen.getByTestId('registrarme');
     fireEvent.click(registerButton);
 
     // Verifica que se muestre el mensaje de error correspondiente

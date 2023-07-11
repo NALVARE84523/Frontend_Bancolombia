@@ -16,7 +16,7 @@ export default function CardTask({ task, functionButton }) {
   const userName = sessionStorage.getItem("userName");
   const userRol = sessionStorage.getItem("userRole");
   const buttonTask = () => {
-    if (!task.state.includes("progreso") && userRol === "doer") {
+    if (!task.state.includes("progreso") && !task.stateCode.includes("finalized") && userRol === "doer") {
       return (
           <Button
             size="small"

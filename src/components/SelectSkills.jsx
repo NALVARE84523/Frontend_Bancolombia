@@ -22,20 +22,22 @@ const MenuProps = {
 const SelectSkills = ({ skillDoer }) => {
   const [totalSkills, setTotalSkills] = useState([]);
   const skills = useContext(SkillsContext);
-  const { setSkillDoer, rol, getDataDoer } = skills;
+  const { setSkillDoer, rol } = skills;
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setSkillDoer(typeof value === "string" ? value.split(",") : value);
-    getDataDoer();
+    /* getDataDoer(); */
   };
   useEffect(() => {
+    console.log("skillDOer: ", skillDoer);
     if (rol === "doer") {
       fetch("https://backend-bancolombia.onrender.com/skills")
         .then((res) => res.json())
         .then((resp) => {
           let arraySkill = resp.map((skill) => skill.skill);
+          console.log("arraySkill: ", arraySkill);
           setTotalSkills(arraySkill);
         })
         .catch((err) => {
@@ -46,14 +48,14 @@ const SelectSkills = ({ skillDoer }) => {
   }, []);
   return (
     <FormControl sx={{ m: 1, width: "100%" }}>
-      <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+      <InputLabel id="demo-multiple-checkbox-label">Tus habilidades</InputLabel>
       <Select
         labelId="demo-multiple-checkbox-label"
         id="demo-multiple-checkbox"
         multiple
         value={skillDoer}
         onChange={handleChange}
-        input={<OutlinedInput label="Tag" />}
+        input={<OutlinedInput label="Tus habilidades" />}
         renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
       >

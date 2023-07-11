@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useContext } from 'react';
 import { toast } from "react-toastify";
 import { SkillsContext } from '../context/skills';
+import PropTypes from "prop-types";
 import CardTask from './CardTask';
 
 const Tasks = ({getDataClient, getDataDoer}) => {
@@ -71,6 +72,11 @@ const Tasks = ({getDataClient, getDataDoer}) => {
       </div>
     </div>
   );
+};
+
+Tasks.propTypes = {
+  getDataDoer: PropTypes.func.isRequired,
+  getDataClient: PropTypes.func.isRequired,
 };
 
 export default Tasks;

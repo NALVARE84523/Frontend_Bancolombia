@@ -17,6 +17,7 @@ import ModalCustom from "./ModalCustom";
 import FormAddTask from "./FormAddTask";
 import { SkillsContext } from '../context/skills';
 import Notifications from './Notifications';
+import PropTypes from "prop-types";
 
 export default function Header({getDataDoer, getDataClient}) {
   const skills = useContext(SkillsContext);
@@ -69,7 +70,6 @@ export default function Header({getDataDoer, getDataClient}) {
         {rol === 'client' && (
             <> 
               <Typography onClick={handleOpenTask} sx={{ minWidth: 100, color: 'text.primary', cursor: 'pointer' }}>Publicar tarea</Typography>
-              <Link to={'/tasksFinalized'}><Typography sx={{ minWidth: 100, color: 'text.primary' }}>Tareas finalizadas</Typography></Link>
             </>
         )}
         <Notifications/>
@@ -153,3 +153,8 @@ export default function Header({getDataDoer, getDataClient}) {
     </>
   );
 }
+
+Header.propTypes = {
+  getDataClient: PropTypes.func,
+  getDataDoer: PropTypes.func,
+};

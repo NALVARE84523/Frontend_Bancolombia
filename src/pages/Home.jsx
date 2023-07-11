@@ -42,14 +42,16 @@ const Home = () => {
       .then((res) => res.json())
       .then((skillsUser) => {
         const skillsArray = skillsUser[0]?.skills || [];
+        console.log("skillsArray: ", skillsArray);
         //  + skillsArray.map(skill => `requiredSkills_contains=${encodeURIComponent(skill)}`).join('&') + "&stateCode=enabled"
         const endpoint = "https://backend-bancolombia.onrender.com/tasks?&stateCode=enabled";
         if (rol === "doer") {
           fetch(endpoint)
             .then((res) => res.json())
             .then((resp) => {
+              console.log("resp: ", resp);
               const filteredTasks = resp.filter(task => {
-                return skillsArray.every(skill => task.requiredSkills.includes(skill));
+                return skillsArray.some(skill => task.requiredSkills.includes(skill));
               });
               setTareasRegistradasClient(filteredTasks);
             })
