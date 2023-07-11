@@ -149,6 +149,7 @@ export default function Register() {
                   type="password"
                   value={password}
                   data-testid="password"
+                  autoComplete="current-password"
                   onChange={e=>passwordChange(e.target.value)}
                 />
               </Grid>
@@ -234,7 +235,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <LinkNavigate to={'/login'} variant="body2">
+                <LinkNavigate to={'/login'} variant="body2" style={{color: '#1976d2'}}>
                   Ya tienes una cuenta? Inicia sesion
                 </LinkNavigate>
               </Grid>

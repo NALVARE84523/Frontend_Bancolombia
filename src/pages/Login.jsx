@@ -125,7 +125,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <LinkNavigate variant="body2" to={'/register'}>
+                <LinkNavigate variant="body2" to={'/register'} style={{color: '#1976d2'}}>
                     {"Registrate"}
                 </LinkNavigate>
               </Grid>
